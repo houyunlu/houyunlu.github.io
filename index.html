@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://houyunlu.github.io">
-  <title>看山跑不死马</title>
+  <title>title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一只混吃等死的程序猿">
+  <meta name="description" content="description">
 <meta property="og:type" content="website">
-<meta property="og:title" content="看山跑不死马">
+<meta property="og:title" content="title">
 <meta property="og:url" content="https://houyunlu.github.io/index.html">
-<meta property="og:site_name" content="看山跑不死马">
-<meta property="og:description" content="一只混吃等死的程序猿">
+<meta property="og:site_name" content="title">
+<meta property="og:description" content="description">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="houyunlu">
+<meta property="article:author" content="看山跑不死马">
+<meta property="article:tag" content="keywords">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternative" href="/atom.xml" title="看山跑不死马" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="title" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -153,6 +154,182 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-3、Kakf消费者组的Reblance" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Kafka-消费者组Reblance"><a href="#Kafka-消费者组Reblance" class="headerlink" title="Kafka:消费者组Reblance"></a>Kafka:消费者组Reblance</h1><h3 id="什么是Reblance"><a href="#什么是Reblance" class="headerlink" title="- 什么是Reblance"></a>- 什么是Reblance</h3><p>Reblance本质上是一种协议，规定了一个消费者组下各个消费者如何达成一致，来分配各个topic的分区。</p>
+<h3 id="Reblance触发时机"><a href="#Reblance触发时机" class="headerlink" title="- Reblance触发时机"></a>- Reblance触发时机</h3><ul>
+<li>组成员数量变更。</li>
+<li>订阅主体数量变更。</li>
+<li>订阅主题的分区数量变更。</li>
+</ul>
+<h3 id="Rebalnce缺点"><a href="#Rebalnce缺点" class="headerlink" title="Rebalnce缺点"></a>Rebalnce缺点</h3><p>需要消费者组下所有消费者参与，stop the word（此期间无法消费消息）。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/15/3%E3%80%81Kakf%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E7%9A%84Reblance/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2、Kafka分区机制原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Kafka-分区机制原理"><a href="#Kafka-分区机制原理" class="headerlink" title="Kafka:分区机制原理"></a>Kafka:分区机制原理</h1><h3 id="为什么分区"><a href="#为什么分区" class="headerlink" title="- 为什么分区"></a>- 为什么分区</h3><p>提供负载均衡能力：每个分区部署在不同的节点，数据的读写操作也是针对分区粒度执行，提高了系统的吞吐量，还可以通过增加新机器方便的增加系统吞吐量。</p>
+<h3 id="分区策略"><a href="#分区策略" class="headerlink" title="- 分区策略"></a>- 分区策略</h3><p>通过实现<code>org.apache.kafka.clients.producer.Partitioner</code>接口也很简单，只的partition()方法可以自定义分区策略。</p>
+<p>以下是一些常见分区策略：</p>
+<ul>
+<li>随机：同一个Topic下多个分区随机分配，可能导致消息在各个分区分布数量差异比较大，老版本Kafka默认采用的策略。</li>
+<li>轮询：同一个Topic下多个分区轮流分配，各个分区的消息分布比较平均，是目前Kafka默认采用的轮询策略。</li>
+<li>按照消息键保序：Kafka可以设置消息的Key，如果设置了Key，相同的Key会分配到同一个分区；如果不设置，还是采用轮询。</li>
+<li>基于地理位置分区：Kafka物理集群部署在不同地方。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/13/2%E3%80%81Kafka%E5%88%86%E5%8C%BA%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-1、Kafaka压缩算法的使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Kafka：压缩算法的使用"><a href="#Kafka：压缩算法的使用" class="headerlink" title="Kafka：压缩算法的使用"></a>Kafka：压缩算法的使用</h1><h4 id="启用压缩算法的目的"><a href="#启用压缩算法的目的" class="headerlink" title="- 启用压缩算法的目的"></a>- 启用压缩算法的目的</h4><p>减小网络和硬盘IO时消息的体积，减小对宽带的压力，提高传输速度。</p>
+<h4 id="如何压缩"><a href="#如何压缩" class="headerlink" title="- 如何压缩"></a>- 如何压缩</h4><p>Kafka的消息层次分为两层，消息集合和消息。消息集合内有多条消息。目前存在两个版本，v2版本和将v1版本中消息的公共部分存放在外部的消息集合。</p>
+<ul>
+<li>v1版本：将多条消息压缩保存在消息集合外部。</li>
+<li>v2版本：将消息集合直接压缩。</li>
+</ul>
+<h4 id="何时压缩"><a href="#何时压缩" class="headerlink" title="- 何时压缩"></a>- 何时压缩</h4><ul>
+<li>压缩可能发生的两个地方：Producer和Broker</li>
+<li>发生压缩的情景<ul>
+<li>Broker端和Producer端使用了不同的压缩算法</li>
+<li>Broker端发生了消息格式转换：Producer端和Broker端消息版本不一样，需要在Broker端执行新版本消息到老版本的转换。</li>
+</ul>
+</li>
+</ul>
+<h4 id="何时解压缩"><a href="#何时解压缩" class="headerlink" title="- 何时解压缩"></a>- 何时解压缩</h4><p>Consumer端消费的时候解压缩。</p>
+<h4 id="如何选择是否启用压缩算法"><a href="#如何选择是否启用压缩算法" class="headerlink" title="- 如何选择是否启用压缩算法"></a>- 如何选择是否启用压缩算法</h4><ul>
+<li>Producer端的CPU资源要充足</li>
+<li>宽带资源有限</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/08/1%E3%80%81Kafaka%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-test" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -301,7 +478,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2021 houyunlu
+    		&copy; 2021 看山跑不死马
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
